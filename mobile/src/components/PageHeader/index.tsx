@@ -7,12 +7,14 @@ import logoImg from '../../assets/images/logo.png';
 
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
+import { ReactNode } from 'react';
 
 interface PageHeaderProps {
   title: string;
+  headerRight?: ReactNode;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({title}) => {
+const PageHeader: React.FC<PageHeaderProps> = ({title, children, headerRight }) => {
 
   const navigation = useNavigation();
 
@@ -30,7 +32,12 @@ const PageHeader: React.FC<PageHeaderProps> = ({title}) => {
         <Image source={logoImg} resizeMode='contain'/>
       </View>
 
-      <Text style={styles.title}> {title} </Text>
+      <View style={styles.header}>
+        <Text style={styles.title}> {title} </Text>
+        {headerRight}
+      </View>
+
+      { children }
     </View>
   );
 }
